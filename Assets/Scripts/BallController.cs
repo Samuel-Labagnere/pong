@@ -6,12 +6,13 @@ public class BallController : MonoBehaviour
 {
 
     public Rigidbody2D rb2D;
-    public float speed;
+    public float speed = 500f;
+    public float multiplier = 1.05f;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 500f;
+
     }
 
     // Update is called once per frame
@@ -22,7 +23,8 @@ public class BallController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
-           rb2D.AddForce(transform.up * speed);
+           rb2D.AddForce(other.contacts[0].normal * speed);
+           speed = speed * multiplier;
         }
     }
 }
