@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject title;
+    public Text subTitle;
+    private RectTransform pos;
 
     public Button playButton;
     public Button optionsButton;
@@ -16,7 +19,12 @@ public class Menu : MonoBehaviour
     public Camera mainCamera;
     public Camera optionsCamera;
 
+    private bool homeScreen;
+
     private void Start() {
+        homeScreen = true;
+        pos = title.GetComponent<RectTransform>();
+
         Button pb = playButton.GetComponent<Button>();
         pb.onClick.AddListener(Play);
         Button ob = optionsButton.GetComponent<Button>();
@@ -28,6 +36,29 @@ public class Menu : MonoBehaviour
 
         mainCamera.gameObject.SetActive(true);
         optionsCamera.gameObject.SetActive(false);
+    }
+
+    void Update(){
+        if(homeScreen){
+            subTitle.gameObject.SetActive(true);
+            playButton.gameObject.SetActive(false);
+            optionsButton.gameObject.SetActive(false);
+            quitButton.gameObject.SetActive(false);
+            if(Input.anyKey){
+                homeScreen = false;
+            }
+        }else{
+            subTitle.gameObject.SetActive(false);
+            // To animate
+            while(pos.anchoredPosition.y < 270f){
+                float ht = pos.anchoredPosition.y + 0.1f;
+                pos.anchoredPosition = new Vector2(pos.anchoredPosition.x, ht);
+            }
+            //
+            playButton.gameObject.SetActive(true);
+            optionsButton.gameObject.SetActive(true);
+            quitButton.gameObject.SetActive(true);
+        }
     }
 
    void Play(){
