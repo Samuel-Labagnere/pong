@@ -47,7 +47,9 @@ public class Pause : MonoBehaviour
             ballSpeed = BallController.speed;
 
             MoveBar.currentInput = MoveBar.inputTypes.None;
-            BallController.speed = 0f;
+            BallController.rb2D.velocity = Vector2.zero;
+            BallController.rb2D.angularVelocity = 0f;
+
 
             hud.gameObject.SetActive(true);
             hudSelect.gameObject.SetActive(true);
