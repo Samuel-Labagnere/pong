@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public float speed = 1f;
+
     public GameObject title;
     public Text subTitle;
     private RectTransform pos;
@@ -38,7 +40,7 @@ public class Menu : MonoBehaviour
         optionsCamera.gameObject.SetActive(false);
     }
 
-    void Update(){
+    void FixedUpdate(){
         if(homeScreen){
             subTitle.gameObject.SetActive(true);
             playButton.gameObject.SetActive(false);
@@ -50,9 +52,13 @@ public class Menu : MonoBehaviour
         }else{
             subTitle.gameObject.SetActive(false);
             // To animate
-            while(pos.anchoredPosition.y < 270f){
+            /*while(pos.anchoredPosition.y < 270f){
                 float ht = pos.anchoredPosition.y + 0.1f;
                 pos.anchoredPosition = new Vector2(pos.anchoredPosition.x, ht);
+            }*/
+            while(pos.anchoredPosition.y < 270f){
+                float ht = pos.anchoredPosition.y + 0.1f;
+                pos.anchoredPosition += Vector2.up;
             }
             //
             playButton.gameObject.SetActive(true);
