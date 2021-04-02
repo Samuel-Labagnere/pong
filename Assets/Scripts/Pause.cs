@@ -10,6 +10,9 @@ public class Pause : MonoBehaviour
     public RawImage hudSelect;
     // public GameObject player;
 
+    private Rigidbody2D ballRb2D;
+    private Vector2 ballRb2DVelocity;
+    private float ballRb2DAngularVelocity;
     private GameObject ball;
     private bool isPaused;
     private float ballSpeed;
@@ -20,6 +23,7 @@ public class Pause : MonoBehaviour
     {
         isPaused = false;
         ball = GameObject.Find("Ball");
+        ballRb2D = ball.GetComponent<Rigidbody2D>();
         // BallController ballScript = ball.GetComponent<BallController>();
         // MoveBar playerScript = player.GetComponent<MoveBar>();
 
@@ -30,39 +34,41 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(ball == null){
-            ball = GameObject.Find("Ball (clone)");
+            ball = GameObject.Find("Ball(clone)");
+            ballRb2D = ball.GetComponent<Rigidbody2D>();
         }
         
         if(Input.GetKeyDown(KeyCode.Space)){
             isPaused = !isPaused;
-        }
+            if(isPaused){
+                // BallController ballSpeed;
+                // MoveBar playerCurrentType;
+                // playerCurrentType = playerScript.currentInput;
+                // ballSpeed = ballScript.speed;
+                playerCurrentType = MoveBar.currentInput;
+                ballRb2DVelocity = ballRb2D.velocity;
+                ballRb2DAngularVelocity = ballRb2D.angularVelocity;
 
-        if(isPaused){
-            // BallController ballSpeed;
-            // MoveBar playerCurrentType;
-            // playerCurrentType = playerScript.currentInput;
-            // ballSpeed = ballScript.speed;
-            playerCurrentType = MoveBar.currentInput;
-            ballSpeed = BallController.speed;
+                MoveBar.currentInput = MoveBar.inputTypes.None;
+                ballRb2D.velocity = Vector2.zero;
+                ballRb2D.angularVelocity = 0f;
 
-            MoveBar.currentInput = MoveBar.inputTypes.None;
-            BallController.rb2D.velocity = Vector2.zero;
-            BallController.rb2D.angularVelocity = 0f;
-
-
-            hud.gameObject.SetActive(true);
-            hudSelect.gameObject.SetActive(true);
-        }else{
-            if(MoveBar.currentInput == MoveBar.inputTypes.None){
-                MoveBar.currentInput = playerCurrentType;
+                hud.gameObject.SetActive(true);
+                hudSelect.gameObject.SetActive(true);
+            }else{
+                if(MoveBar.currentInput == MoveBar.inputTypes.None){
+                    MoveBar.currentInput = playerCurrentType;
+                }
+                if(ballRb2D.angularVelocity == 0f){
+                    
+                    ballRb2D.angularVelocity = ballRb2DAngularVelocity;
+                }
+                
+                hud.gameObject.SetActive(false);
+                hudSelect.gameObject.SetActive(false);
             }
-            if(BallController.speed == 0f){
-                BallController.speed = ballSpeed;
-            }
-            
-            hud.gameObject.SetActive(false);
-            hudSelect.gameObject.SetActive(false);
         }
     }
 }

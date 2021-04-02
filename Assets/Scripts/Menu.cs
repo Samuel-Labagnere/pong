@@ -15,6 +15,9 @@ public class Menu : MonoBehaviour
     public Button playButton;
     public Button optionsButton;
     public Button quitButton;
+    public Text playObject;
+    public Text optionsObject;
+    public Text quitObject;
 
     public Button returnButton;
 
@@ -48,22 +51,30 @@ public class Menu : MonoBehaviour
             quitButton.gameObject.SetActive(false);
             if(Input.anyKey){
                 homeScreen = false;
+                StartCoroutine("LiftUp");
             }
         }else{
             subTitle.gameObject.SetActive(false);
-            // To animate
-            /*while(pos.anchoredPosition.y < 270f){
-                float ht = pos.anchoredPosition.y + 0.1f;
-                pos.anchoredPosition = new Vector2(pos.anchoredPosition.x, ht);
-            }*/
-            while(pos.anchoredPosition.y < 270f){
-                float ht = pos.anchoredPosition.y + 0.1f;
-                pos.anchoredPosition += Vector2.up;
+            if(pos.anchoredPosition.y < 270f){
+                pos.anchoredPosition += Vector2.up * 3f;
             }
-            //
-            playButton.gameObject.SetActive(true);
-            optionsButton.gameObject.SetActive(true);
-            quitButton.gameObject.SetActive(true);
+        }
+    }
+
+    IEnumerator LiftUp(){
+        yield return new WaitForSeconds(1);
+        playButton.gameObject.SetActive(true);
+        optionsButton.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
+        playObject.color = new Color(1, 1, 1, 0);
+        optionsObject.color = new Color(1, 1, 1, 0);
+        quitObject.color = new Color(1, 1, 1, 0);
+
+        for(float i = 0; i < 1; i += 0.1f){
+            yield return new WaitForSeconds(0.1f);
+            playObject.color = new Color(1, 1, 1, i);
+            optionsObject.color = new Color(1, 1, 1, i);
+            quitObject.color = new Color(1, 1, 1, i);
         }
     }
 

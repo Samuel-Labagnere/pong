@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
 
-    public static Rigidbody2D rb2D;
+    public Rigidbody2D rb2D;
     public static float speed = 500f;
     public float multiplier = 1.05f;
 

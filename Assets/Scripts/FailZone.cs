@@ -6,6 +6,7 @@ public class FailZone : MonoBehaviour
 {
 
     public GameObject ball;
+    public AudioSource looseSound;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class FailZone : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag == "Ball"){
             IEnumerator coroutine = BallInstantiate(other);
+            looseSound.Play();  
             StartCoroutine(coroutine);
         }
     }
