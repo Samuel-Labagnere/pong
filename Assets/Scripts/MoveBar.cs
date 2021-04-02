@@ -8,8 +8,8 @@ public class MoveBar : MonoBehaviour
     public float speed = 10f;
     public Rigidbody2D rb2D;
 
-    public enum inputTypes {Mouse, Keyboard};
-    public inputTypes currentInput = inputTypes.Keyboard;
+    public enum inputTypes {Mouse, Keyboard, None};
+    public static inputTypes currentInput = inputTypes.Keyboard;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +45,8 @@ public class MoveBar : MonoBehaviour
             }
 
             rb2D.MovePosition(newPos);
+        }else if(currentInput == inputTypes.None){
+            // Nothing happen here :D
         }
     }
 }
