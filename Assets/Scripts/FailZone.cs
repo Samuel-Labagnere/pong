@@ -10,6 +10,7 @@ public class FailZone : MonoBehaviour
 
     public GameObject ball;
     public AudioSource looseSound;
+    public GameObject spawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,9 @@ public class FailZone : MonoBehaviour
         yield return new WaitForSeconds(1);
         ballRb2D.velocity = Vector2.zero;
         ballRb2D.angularVelocity = 0f;
-        ballRb2D.MovePosition(new Vector2(-1, 0));
+
+        ball.transform.position = spawnPoint.transform.position;
+
         // Destroy(other.gameObject);
         // Instantiate(ball, new Vector2(-1, 0), Quaternion.identity);
     }
