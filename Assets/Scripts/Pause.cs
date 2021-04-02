@@ -35,10 +35,10 @@ public class Pause : MonoBehaviour
     void Update()
     {
 
-        if(ball == null){
-            ball = GameObject.Find("Ball(clone)");
-            ballRb2D = ball.GetComponent<Rigidbody2D>();
-        }
+        // if(ball == null){
+        //     ball = GameObject.Find("Ball(clone)");
+        //     ballRb2D = ball.GetComponent<Rigidbody2D>();
+        // }
         
         if(Input.GetKeyDown(KeyCode.Space)){
             isPaused = !isPaused;
