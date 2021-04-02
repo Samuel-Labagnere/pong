@@ -72,3 +72,18 @@ public class Pause : MonoBehaviour
         }
     }
 }
+
+/*
+
+//// VALEURS POSITION HUDSELECT ////
+
+/// POSITION 1 (Reprendre)
+    115 (PosY)
+
+/// POSITION 2 (Rejouer)
+    -53 (PosY)
+
+/// POSITION 3 (Quitter)
+    -220 (PosY)
+
+*/
