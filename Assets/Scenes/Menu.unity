@@ -202,11 +202,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0e3190d5a7023459266ba1a0c491c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
   title: {fileID: 1794213665}
   subTitle: {fileID: 1637127126}
   playButton: {fileID: 814424196}
   optionsButton: {fileID: 899230036}
   quitButton: {fileID: 925356921}
+  playObject: {fileID: 396198505}
+  optionsObject: {fileID: 1088650990}
+  quitObject: {fileID: 2084157261}
   returnButton: {fileID: 1942674535}
   mainCamera: {fileID: 416736378}
   optionsCamera: {fileID: 1122505827}
@@ -280,7 +284,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Jouer
 --- !u!222 &396198506
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -591,7 +595,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.99215686}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1091,7 +1095,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Settings
+  m_Text: Options
 --- !u!222 &1088650991
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1900,7 +1904,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Quitter
 --- !u!222 &2084157262
 CanvasRenderer:
   m_ObjectHideFlags: 0
