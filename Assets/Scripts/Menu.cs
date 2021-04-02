@@ -18,6 +18,7 @@ public class Menu : MonoBehaviour
     public Text playObject;
     public Text optionsObject;
     public Text quitObject;
+    public AudioSource clickSound;
 
     public Button returnButton;
 
@@ -79,19 +80,23 @@ public class Menu : MonoBehaviour
     }
 
    void Play(){
+       clickSound.Play();
        SceneManager.LoadScene("Game");
    }
 
    void Options(){
+       clickSound.Play();
        mainCamera.gameObject.SetActive(false);
        optionsCamera.gameObject.SetActive(true);
    }
    void Return(){
+       clickSound.Play();
        mainCamera.gameObject.SetActive(true);
        optionsCamera.gameObject.SetActive(false);
    }
 
    void Quit(){
+       clickSound.Play();
        Application.Quit();
    }
 
