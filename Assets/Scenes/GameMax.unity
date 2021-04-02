@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 335744010}
   - component: {fileID: 335744012}
   m_Layer: 0
-  m_Name: Barre
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
