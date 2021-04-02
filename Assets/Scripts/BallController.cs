@@ -6,7 +6,7 @@ public class BallController : MonoBehaviour
 {
 
     public Rigidbody2D rb2D;
-    public float speed = 500f;
+    public static float speed = 500f;
     public float multiplier = 1.05f;
 
     // Start is called before the first frame update
