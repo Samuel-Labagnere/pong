@@ -24,7 +24,9 @@ public class BallController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         rb2D.AddForce(other.contacts[0].normal * speed);
         if(other.gameObject.tag == "Player"){
-           speed = speed * multiplier;
+            if(speed <= 10000f){
+                speed = speed * multiplier;
+            }
         }
     }
 }
