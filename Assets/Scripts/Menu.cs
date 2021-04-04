@@ -20,6 +20,7 @@ public class Menu : MonoBehaviour
     public Text quitObject;
     public RawImage hudSelect;
     public AudioSource clickSound;
+    public AudioSource selectChange;
     private bool anim;
     private RectTransform hudSelectPos;
     private float hudSelectY;
@@ -92,9 +93,11 @@ public class Menu : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.UpArrow)){
                 selectPosNumber -= 1;
+                selectChange.Play();
             }
             if(Input.GetKeyDown(KeyCode.DownArrow)){
                 selectPosNumber += 1;
+                selectChange.Play();
             }
             if(selectPosNumber == System.Enum.GetValues(typeof(selectPos)).Length || selectPosNumber < 0){
                 selectPosNumber = 0;
