@@ -137,12 +137,14 @@ public class Menu : MonoBehaviour
         playObject.color = new Color(1, 1, 1, 0);
         optionsObject.color = new Color(1, 1, 1, 0);
         quitObject.color = new Color(1, 1, 1, 0);
+        hudSelect.color = new Color(1, 1, 1, 0);
 
         for(float i = 0; i < 1; i += 0.1f){
             yield return new WaitForSeconds(0.1f);
             playObject.color = new Color(1, 1, 1, i);
             optionsObject.color = new Color(1, 1, 1, i);
             quitObject.color = new Color(1, 1, 1, i);
+            hudSelect.color = new Color(1, 1, 1, i);
         }
 
         anim = true;
