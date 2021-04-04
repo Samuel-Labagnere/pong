@@ -25,8 +25,8 @@ public class Menu : MonoBehaviour
     private RectTransform hudSelectPos;
     private float hudSelectY;
 
-    public enum selectPos {Play, Options, Quit};
-    public selectPos currentSelectPos = selectPos.Play;
+    private enum selectPos {Play, Options, Quit};
+    private selectPos currentSelectPos = selectPos.Play;
     private int selectPosNumber = 0;
 
     public Button returnButton;
@@ -99,8 +99,11 @@ public class Menu : MonoBehaviour
                 selectPosNumber += 1;
                 selectChange.Play();
             }
-            if(selectPosNumber == System.Enum.GetValues(typeof(selectPos)).Length || selectPosNumber < 0){
+            if(selectPosNumber == System.Enum.GetValues(typeof(selectPos)).Length){
                 selectPosNumber = 0;
+            }
+            if(selectPosNumber < 0){
+                selectPosNumber = System.Enum.GetValues(typeof(selectPos)).Length - 1;
             }
 
             switch(currentSelectPos){
