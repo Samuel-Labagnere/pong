@@ -10,6 +10,7 @@ public class MoveBar : MonoBehaviour
 
     public enum inputTypes {Mouse, Keyboard, None};
     public static inputTypes currentInput = inputTypes.Keyboard;
+    private int inputNumber = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,33 @@ public class MoveBar : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if(Input.GetKeyDown(KeyCode.E)){
+            Debug.Log("E pressed!");
+            inputNumber += 1;
+            if(inputNumber == System.Enum.GetValues(typeof(inputTypes)).Length - 1){
+                inputNumber = 0;
+            }
+        }
+        switch(inputNumber){
+            case 0:
+                Debug.Log("inputNumber: " + inputNumber);
+                currentInput = inputTypes.Mouse;
+            break;
+            case 1:
+                Debug.Log("inputNumber: " + inputNumber);
+                currentInput = inputTypes.Keyboard;
+            break;
+            case 2:
+                Debug.Log("inputNumber: " + inputNumber);
+                currentInput = inputTypes.None;
+            break;
+            default:
+                Debug.Log("inputNumber: " + inputNumber);
+                currentInput = inputTypes.Mouse;
+            break;
+        }
+
         if(currentInput == inputTypes.Mouse){
             Vector3 newPos = Input.mousePosition;
             newPos.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.

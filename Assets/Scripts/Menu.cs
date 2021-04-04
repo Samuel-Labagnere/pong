@@ -18,7 +18,15 @@ public class Menu : MonoBehaviour
     public Text playObject;
     public Text optionsObject;
     public Text quitObject;
+    public RawImage hudSelect;
     public AudioSource clickSound;
+    private bool anim;
+    private RectTransform hudSelectPos;
+    private float hudSelectY;
+
+    public enum selectPos {Play, Options, Quit};
+    public selectPos currentSelectPos = selectPos.Play;
+    private int selectPosNumber = 0;
 
     public Button returnButton;
 
@@ -29,7 +37,9 @@ public class Menu : MonoBehaviour
 
     private void Start() {
         homeScreen = true;
+        anim = false;
         pos = title.GetComponent<RectTransform>();
+        hudSelectPos = hudSelect.gameObject.GetComponent<RectTransform>();
 
         Button pb = playButton.GetComponent<Button>();
         pb.onClick.AddListener(Play);
@@ -42,6 +52,7 @@ public class Menu : MonoBehaviour
 
         mainCamera.gameObject.SetActive(true);
         optionsCamera.gameObject.SetActive(false);
+        hudSelect.gameObject.SetActive(false);
     }
 
     void FixedUpdate(){
@@ -50,6 +61,7 @@ public class Menu : MonoBehaviour
             playButton.gameObject.SetActive(false);
             optionsButton.gameObject.SetActive(false);
             quitButton.gameObject.SetActive(false);
+            hudSelect.gameObject.SetActive(false);
             if(Input.anyKey){
                 homeScreen = false;
                 StartCoroutine("LiftUp");
@@ -59,6 +71,60 @@ public class Menu : MonoBehaviour
             if(pos.anchoredPosition.y < 270f){
                 pos.anchoredPosition += Vector2.up * 3f;
             }
+            if(anim){
+                switch(selectPosNumber){
+                    case 0:
+                        currentSelectPos = selectPos.Play;
+                    break;
+                    case 1:
+                        currentSelectPos = selectPos.Options;
+                    break;
+                    case 2:
+                        currentSelectPos = selectPos.Quit;
+                    break;
+                    default:
+                        currentSelectPos = selectPos.Play;
+                    break;
+                }
+                if(Input.GetKeyDown(KeyCode.UpArrow)){
+                    selectPosNumber -= 1;
+                }
+                if(Input.GetKeyDown(KeyCode.DownArrow)){
+                    selectPosNumber += 1;
+                }
+                if(selectPosNumber == System.Enum.GetValues(typeof(selectPos)).Length || selectPosNumber < 0){
+                    selectPosNumber = 0;
+                }
+
+                switch(currentSelectPos){
+                    case selectPos.Play:
+                        hudSelectY = -52.07f;
+                        hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                    break;
+                    case selectPos.Options:
+                        hudSelectY = -173.29f;
+                        hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                    break;
+                    case selectPos.Quit:
+                        hudSelectY = -346.48f;
+                        hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                    break;
+                }
+
+                if(Input.GetKeyDown(KeyCode.Return)){
+                    switch(currentSelectPos){
+                        case selectPos.Play:
+                            Play();
+                        break;
+                        case selectPos.Options:
+                            Options();
+                        break;
+                        case selectPos.Quit:
+                            Quit();
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -67,6 +133,7 @@ public class Menu : MonoBehaviour
         playButton.gameObject.SetActive(true);
         optionsButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
+        hudSelect.gameObject.SetActive(true);
         playObject.color = new Color(1, 1, 1, 0);
         optionsObject.color = new Color(1, 1, 1, 0);
         quitObject.color = new Color(1, 1, 1, 0);
@@ -77,6 +144,8 @@ public class Menu : MonoBehaviour
             optionsObject.color = new Color(1, 1, 1, i);
             quitObject.color = new Color(1, 1, 1, i);
         }
+
+        anim = true;
     }
 
    void Play(){
