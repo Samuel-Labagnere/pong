@@ -12,6 +12,8 @@ public class MoveBar : MonoBehaviour
     public static inputTypes currentInput = inputTypes.Keyboard;
     private int inputNumber = 1;
 
+    private float newRot = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,6 @@ public class MoveBar : MonoBehaviour
 
     void Update(){
         if(Input.GetKeyDown(KeyCode.E)){
-            Debug.Log("E pressed!");
             inputNumber += 1;
             if(inputNumber == System.Enum.GetValues(typeof(inputTypes)).Length - 1){
                 inputNumber = 0;
@@ -28,21 +29,25 @@ public class MoveBar : MonoBehaviour
         }
         switch(inputNumber){
             case 0:
-                Debug.Log("inputNumber: " + inputNumber);
                 currentInput = inputTypes.Mouse;
             break;
             case 1:
-                Debug.Log("inputNumber: " + inputNumber);
                 currentInput = inputTypes.Keyboard;
             break;
             case 2:
-                Debug.Log("inputNumber: " + inputNumber);
                 currentInput = inputTypes.None;
             break;
-            default:
-                Debug.Log("inputNumber: " + inputNumber);
-                currentInput = inputTypes.Mouse;
-            break;
+        }
+
+        if(currentInput == inputTypes.Mouse){
+            if (Input.GetKey(KeyCode.Mouse0)){
+                newRot += 1.02f;
+                transform.rotation = Quaternion.Euler(Vector3.forward * newRot);
+            }
+            if (Input.GetKey(KeyCode.Mouse1)){
+                newRot -= 1.02f;
+                transform.rotation = Quaternion.Euler(Vector3.forward * newRot);
+            }
         }
     }
 
@@ -71,6 +76,14 @@ public class MoveBar : MonoBehaviour
             if (Input.GetAxis("Vertical") < 0f)
             {
                 newPos += Time.fixedDeltaTime * speed * Vector2.down;
+            }
+            if (Input.GetAxis("Fire1") > 0f){
+                newRot += 2f;
+                transform.rotation = Quaternion.Euler(Vector3.forward * newRot);
+            }
+            if (Input.GetAxis("Fire2") > 0f){
+                newRot -= 2f;
+                transform.rotation = Quaternion.Euler(Vector3.forward * newRot);
             }
 
             rb2D.MovePosition(newPos);
