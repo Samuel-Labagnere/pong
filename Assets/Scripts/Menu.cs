@@ -71,58 +71,61 @@ public class Menu : MonoBehaviour
             if(pos.anchoredPosition.y < 270f){
                 pos.anchoredPosition += Vector2.up * 3f;
             }
-            if(anim){
-                switch(selectPosNumber){
-                    case 0:
-                        currentSelectPos = selectPos.Play;
-                    break;
-                    case 1:
-                        currentSelectPos = selectPos.Options;
-                    break;
-                    case 2:
-                        currentSelectPos = selectPos.Quit;
-                    break;
-                    default:
-                        currentSelectPos = selectPos.Play;
-                    break;
-                }
-                if(Input.GetKeyDown(KeyCode.UpArrow)){
-                    selectPosNumber -= 1;
-                }
-                if(Input.GetKeyDown(KeyCode.DownArrow)){
-                    selectPosNumber += 1;
-                }
-                if(selectPosNumber == System.Enum.GetValues(typeof(selectPos)).Length || selectPosNumber < 0){
-                    selectPosNumber = 0;
-                }
+        }
+    }
 
+    void Update(){
+        if(anim){
+            switch(selectPosNumber){
+                case 0:
+                    currentSelectPos = selectPos.Play;
+                break;
+                case 1:
+                    currentSelectPos = selectPos.Options;
+                break;
+                case 2:
+                    currentSelectPos = selectPos.Quit;
+                break;
+                default:
+                    currentSelectPos = selectPos.Play;
+                break;
+            }
+            if(Input.GetKeyDown(KeyCode.UpArrow)){
+                selectPosNumber -= 1;
+            }
+            if(Input.GetKeyDown(KeyCode.DownArrow)){
+                selectPosNumber += 1;
+            }
+            if(selectPosNumber == System.Enum.GetValues(typeof(selectPos)).Length || selectPosNumber < 0){
+                selectPosNumber = 0;
+            }
+
+            switch(currentSelectPos){
+                case selectPos.Play:
+                    hudSelectY = -52.07f;
+                    hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                break;
+                case selectPos.Options:
+                    hudSelectY = -173.29f;
+                    hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                break;
+                case selectPos.Quit:
+                    hudSelectY = -346.48f;
+                    hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                break;
+            }
+
+            if(Input.GetKeyDown(KeyCode.Return)){
                 switch(currentSelectPos){
                     case selectPos.Play:
-                        hudSelectY = -52.07f;
-                        hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                        Play();
                     break;
                     case selectPos.Options:
-                        hudSelectY = -173.29f;
-                        hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                        Options();
                     break;
                     case selectPos.Quit:
-                        hudSelectY = -346.48f;
-                        hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                        Quit();
                     break;
-                }
-
-                if(Input.GetKeyDown(KeyCode.Return)){
-                    switch(currentSelectPos){
-                        case selectPos.Play:
-                            Play();
-                        break;
-                        case selectPos.Options:
-                            Options();
-                        break;
-                        case selectPos.Quit:
-                            Quit();
-                        break;
-                    }
                 }
             }
         }
