@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MoveBar : MonoBehaviour
 {
@@ -14,10 +15,28 @@ public class MoveBar : MonoBehaviour
 
     private float newRot = 0f;
 
+    private Vector2 move;
+    private InputAction moveAction;
+
+    public PlayerInput test; 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        moveAction = test.actions.FindAction("Move");
+        moveAction.PerformInteractiveRebinding()
+                    // To avoid accidental input from mouse motion
+                    .WithControlsExcluding("Mouse")
+                    .OnMatchWaitForAnother(0.1f)
+                    .Start();
+    }
+
+    public void Move(InputAction.CallbackContext context)
+    {
+        move = context.ReadValue<Vector2>();
+
+        Debug.Log(move.x);
+        Debug.Log(move.y);
     }
 
     void Update(){
@@ -54,6 +73,7 @@ public class MoveBar : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if(currentInput == inputTypes.Mouse){
             Vector3 newPos = Input.mousePosition;
             newPos.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
