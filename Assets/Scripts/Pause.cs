@@ -16,7 +16,7 @@ public class Pause : MonoBehaviour
     private GameObject ball;
     private bool isPaused;
     private float ballSpeed;
-    private MoveBar.inputTypes playerCurrentType;
+    private int playerCurrentType;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,6 @@ public class Pause : MonoBehaviour
         isPaused = false;
         ball = GameObject.Find("Ball");
         ballRb2D = ball.GetComponent<Rigidbody2D>();
-        // BallController ballScript = ball.GetComponent<BallController>();
         // MoveBar playerScript = player.GetComponent<MoveBar>();
 
         hud.gameObject.SetActive(false);
@@ -43,27 +42,25 @@ public class Pause : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             isPaused = !isPaused;
             if(isPaused){
-                // BallController ballSpeed;
-                // MoveBar playerCurrentType;
-                // playerCurrentType = playerScript.currentInput;
-                // ballSpeed = ballScript.speed;
-                playerCurrentType = MoveBar.currentInput;
+                ballSpeed = BallController.speed;
+                playerCurrentType = MoveBar.inputNumber;
                 ballRb2DVelocity = ballRb2D.velocity;
                 ballRb2DAngularVelocity = ballRb2D.angularVelocity;
 
-                MoveBar.currentInput = MoveBar.inputTypes.None;
+                MoveBar.inputNumber = 2;
                 ballRb2D.velocity = Vector2.zero;
                 ballRb2D.angularVelocity = 0f;
 
                 hud.gameObject.SetActive(true);
                 hudSelect.gameObject.SetActive(true);
             }else{
-                if(MoveBar.currentInput == MoveBar.inputTypes.None){
-                    MoveBar.currentInput = playerCurrentType;
+                if(MoveBar.inputNumber == 2){
+                    MoveBar.inputNumber = playerCurrentType;
                 }
                 if(ballRb2D.angularVelocity == 0f){
                     
                     ballRb2D.angularVelocity = ballRb2DAngularVelocity;
+                    ballRb2D.AddForce(new Vector2(UnityEngine.Random.Range(0, 5), UnityEngine.Random.Range(0, 5)) * ballSpeed);
                 }
                 
                 hud.gameObject.SetActive(false);

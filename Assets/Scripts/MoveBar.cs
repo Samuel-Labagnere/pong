@@ -9,8 +9,8 @@ public class MoveBar : MonoBehaviour
     public Rigidbody2D rb2D;
 
     public enum inputTypes {Mouse, Keyboard, None};
-    public static inputTypes currentInput = inputTypes.Keyboard;
-    private int inputNumber = 1;
+    public inputTypes currentInput = inputTypes.Keyboard;
+    public static int inputNumber = 1;
 
     private float newRot = 0f;
 
@@ -23,7 +23,7 @@ public class MoveBar : MonoBehaviour
     void Update(){
         if(Input.GetKeyDown(KeyCode.E)){
             inputNumber += 1;
-            if(inputNumber == System.Enum.GetValues(typeof(inputTypes)).Length - 1){
+            if(inputNumber == System.Enum.GetValues(typeof(inputTypes)).Length){
                 inputNumber = 0;
             }
         }
