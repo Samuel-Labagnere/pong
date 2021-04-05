@@ -12,6 +12,16 @@ public class KeyMapping : MonoBehaviour
     private InputAction moveAction;
     private InputActionRebindingExtensions.RebindingOperation rbOperation;
     private int up;
+    private int left;
+    private int down;
+    private int right;
+
+    public Text upText;
+    public Text leftText;
+    public Text downText;
+    public Text rightText;
+    public Text rotLeftText;
+    public Text rotRightText;
 
     public Text button;
     public PlayerInput pInput; 
@@ -35,11 +45,21 @@ public class KeyMapping : MonoBehaviour
         fireAction = pInput.actions.FindAction("Fire");
         moveAction = pInput.actions.FindAction("Move");
         up = moveAction.bindings.IndexOf(x => x.name == "up");
+        left = moveAction.bindings.IndexOf(x => x.name == "left");
+        down = moveAction.bindings.IndexOf(x => x.name == "down");
+        right = moveAction.bindings.IndexOf(x => x.name == "right");
     }
 
     // Update is called once per frame
     void Update()
     {
+        upText.text = InputControlPath.ToHumanReadableString(moveAction.bindings[up].effectivePath);
+        leftText.text = InputControlPath.ToHumanReadableString(moveAction.bindings[left].effectivePath);
+        downText.text = InputControlPath.ToHumanReadableString(moveAction.bindings[down].effectivePath);
+        rightText.text = InputControlPath.ToHumanReadableString(moveAction.bindings[right].effectivePath);
+        rotLeftText.text = "?";
+        rotRightText.text = "?";
+
         switch(selectPosNumber){
             case 0:
                 currentPos = selectPos.Clavier;
@@ -94,27 +114,27 @@ public class KeyMapping : MonoBehaviour
                 selectRect.sizeDelta = new Vector2(350, 100);
             break;
             case selectPos.Up:
-                selectRect.anchoredPosition = new Vector2(-700, -180);
-                selectRect.sizeDelta = new Vector2(150, 150);
+                selectRect.anchoredPosition = new Vector2(-670, -180);
+                selectRect.sizeDelta = new Vector2(200, 150);
             break;
             case selectPos.Left:
-                selectRect.anchoredPosition = new Vector2(-450, -180);
+                selectRect.anchoredPosition = new Vector2(-420, -180);
                 selectRect.sizeDelta = new Vector2(150, 150);
             break;
             case selectPos.Down:
-                selectRect.anchoredPosition = new Vector2(-200, -180);
+                selectRect.anchoredPosition = new Vector2(-170, -180);
                 selectRect.sizeDelta = new Vector2(150, 150);
             break;
             case selectPos.Right:
-                selectRect.anchoredPosition = new Vector2(50, -180);
+                selectRect.anchoredPosition = new Vector2(80, -180);
                 selectRect.sizeDelta = new Vector2(150, 150);
             break;
             case selectPos.RotLeft:
-                selectRect.anchoredPosition = new Vector2(300, -180);
+                selectRect.anchoredPosition = new Vector2(330, -180);
                 selectRect.sizeDelta = new Vector2(150, 150);
             break;
             case selectPos.RotRight:
-                selectRect.anchoredPosition = new Vector2(550, -180);
+                selectRect.anchoredPosition = new Vector2(580, -180);
                 selectRect.sizeDelta = new Vector2(150, 150);
             break;
             case selectPos.Confirm:
@@ -175,7 +195,7 @@ public class KeyMapping : MonoBehaviour
         }
     }
 
-    void Remap(){
+    void RemapUp(){
         Debug.Log("remap go");
         moveAction.Disable();
         rbOperation = moveAction.PerformInteractiveRebinding(up)
@@ -188,8 +208,63 @@ public class KeyMapping : MonoBehaviour
  
             }).OnComplete(op =>
             {
-                Debug.Log(rbOperation.selectedControl.name);
-                button.text = rbOperation.selectedControl.name;
+                Debug.Log("saved");
+                moveAction.Enable();
+                moveAction.Dispose();
+            });
+    }
+
+    void RemapLeft(){
+        Debug.Log("remap go");
+        moveAction.Disable();
+        rbOperation = moveAction.PerformInteractiveRebinding(left)
+            .WithControlsExcluding("Mouse")
+            .WithCancelingThrough("<Keyboard>/escape")
+            .OnMatchWaitForAnother(0.2f)
+            .Start().OnCancel(op =>
+            {
+                Debug.Log("cancel");
+ 
+            }).OnComplete(op =>
+            {
+                Debug.Log("saved");
+                moveAction.Enable();
+                moveAction.Dispose();
+            });
+    }
+
+    void RemapDown(){
+        Debug.Log("remap go");
+        moveAction.Disable();
+        rbOperation = moveAction.PerformInteractiveRebinding(down)
+            .WithControlsExcluding("Mouse")
+            .WithCancelingThrough("<Keyboard>/escape")
+            .OnMatchWaitForAnother(0.2f)
+            .Start().OnCancel(op =>
+            {
+                Debug.Log("cancel");
+ 
+            }).OnComplete(op =>
+            {
+                Debug.Log("saved");
+                moveAction.Enable();
+                moveAction.Dispose();
+            });
+    }
+
+    void RemapRight(){
+        Debug.Log("remap go");
+        moveAction.Disable();
+        rbOperation = moveAction.PerformInteractiveRebinding(right)
+            .WithControlsExcluding("Mouse")
+            .WithCancelingThrough("<Keyboard>/escape")
+            .OnMatchWaitForAnother(0.2f)
+            .Start().OnCancel(op =>
+            {
+                Debug.Log("cancel");
+ 
+            }).OnComplete(op =>
+            {
                 Debug.Log("saved");
                 moveAction.Enable();
                 moveAction.Dispose();
