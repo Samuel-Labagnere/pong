@@ -4115,8 +4115,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 123.82, y: -173.29}
-  m_SizeDelta: {x: 878.91, y: 103.91}
+  m_AnchoredPosition: {x: 60, y: -173.29}
+  m_SizeDelta: {x: 1118.06, y: 103.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637127126
 MonoBehaviour:
@@ -4145,13 +4145,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 72
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press any key to start the game...
+  m_Text: Appuyez sur une touche pour commencer...
 --- !u!222 &1637127127
 CanvasRenderer:
   m_ObjectHideFlags: 0
