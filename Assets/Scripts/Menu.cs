@@ -12,12 +12,16 @@ public class Menu : MonoBehaviour
     public Text subTitle;
     private RectTransform pos;
 
+    public GameObject credits;
+
     public Button playButton;
     public Button optionsButton;
     public Button quitButton;
+    public Button creditsButton;
     public Text playObject;
     public Text optionsObject;
     public Text quitObject;
+    public Text creditsObject;
     public RawImage hudSelect;
     public AudioSource clickSound;
     public AudioSource selectChange;
@@ -25,7 +29,7 @@ public class Menu : MonoBehaviour
     private RectTransform hudSelectPos;
     private float hudSelectY;
 
-    private enum selectPos {Play, Options, Quit};
+    private enum selectPos {Play, Options, Quit, Credits};
     private selectPos currentSelectPos = selectPos.Play;
     private int selectPosNumber = 0;
 
@@ -60,6 +64,7 @@ public class Menu : MonoBehaviour
             playButton.gameObject.SetActive(false);
             optionsButton.gameObject.SetActive(false);
             quitButton.gameObject.SetActive(false);
+            creditsButton.gameObject.SetActive(false);
             hudSelect.gameObject.SetActive(false);
             if(Input.anyKey){
                 homeScreen = false;
@@ -85,6 +90,9 @@ public class Menu : MonoBehaviour
                 case 2:
                     currentSelectPos = selectPos.Quit;
                 break;
+                case 3:
+                    currentSelectPos = selectPos.Credits;
+                break;
                 default:
                     currentSelectPos = selectPos.Play;
                 break;
@@ -107,15 +115,22 @@ public class Menu : MonoBehaviour
             switch(currentSelectPos){
                 case selectPos.Play:
                     hudSelectY = -52.07f;
-                    hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                    hudSelectPos.anchoredPosition = new Vector2(0, hudSelectY);
+                    hudSelectPos.sizeDelta = new Vector2(450, 100);
                 break;
                 case selectPos.Options:
                     hudSelectY = -173.29f;
-                    hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                    hudSelectPos.anchoredPosition = new Vector2(0, hudSelectY);
+                    hudSelectPos.sizeDelta = new Vector2(450, 100);
                 break;
                 case selectPos.Quit:
                     hudSelectY = -346.48f;
-                    hudSelectPos.anchoredPosition = new Vector2(hudSelectPos.anchoredPosition.x, hudSelectY);
+                    hudSelectPos.anchoredPosition = new Vector2(0, hudSelectY);
+                    hudSelectPos.sizeDelta = new Vector2(450, 100);
+                break;
+                case selectPos.Credits:
+                    hudSelectPos.anchoredPosition = new Vector2(-815, -485);
+                    hudSelectPos.sizeDelta = new Vector2(300, 80);
                 break;
             }
 
@@ -130,6 +145,9 @@ public class Menu : MonoBehaviour
                     case selectPos.Quit:
                         Quit();
                     break;
+                    case selectPos.Credits:
+                        StartCoroutine("Credits");
+                    break;
                 }
             }
         }
@@ -140,10 +158,12 @@ public class Menu : MonoBehaviour
         playButton.gameObject.SetActive(true);
         optionsButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
+        creditsButton.gameObject.SetActive(true);
         hudSelect.gameObject.SetActive(true);
         playObject.color = new Color(1, 1, 1, 0);
         optionsObject.color = new Color(1, 1, 1, 0);
         quitObject.color = new Color(1, 1, 1, 0);
+        creditsObject.color = new Color(1, 1, 1, 0);
         hudSelect.color = new Color(1, 1, 1, 0);
 
         for(float i = 0; i < 1; i += 0.1f){
@@ -151,6 +171,7 @@ public class Menu : MonoBehaviour
             playObject.color = new Color(1, 1, 1, i);
             optionsObject.color = new Color(1, 1, 1, i);
             quitObject.color = new Color(1, 1, 1, i);
+            creditsObject.color = new Color(1, 1, 1, i);
             hudSelect.color = new Color(1, 1, 1, i);
         }
 
@@ -172,6 +193,16 @@ public class Menu : MonoBehaviour
    void Quit(){
        clickSound.Play();
        Application.Quit();
+   }
+
+   IEnumerator Credits(){
+        clickSound.Play();
+        anim = false;
+        var creditsVideo = credits.GetComponent<UnityEngine.Video.VideoPlayer>();
+        creditsVideo.Play();
+        yield return new WaitForSeconds(21);
+        creditsVideo.Stop();
+        anim = true;
    }
 
 }
