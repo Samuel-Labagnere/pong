@@ -32,11 +32,13 @@ public class Menu : MonoBehaviour
     public Camera mainCamera;
     public Camera optionsCamera;
 
+    public static bool options;
     private bool homeScreen;
 
     private void Start() {
         homeScreen = true;
         anim = false;
+        options = false;
         pos = title.GetComponent<RectTransform>();
         hudSelectPos = hudSelect.gameObject.GetComponent<RectTransform>();
 
@@ -164,6 +166,7 @@ public class Menu : MonoBehaviour
        clickSound.Play();
        mainCamera.gameObject.SetActive(false);
        optionsCamera.gameObject.SetActive(true);
+       options = true;
    }
 
    void Quit(){

@@ -223,6 +223,7 @@ public class KeyMapping : MonoBehaviour
         clickSound.Play();
         mainCamera.gameObject.SetActive(true);
         optionsCamera.gameObject.SetActive(false);
+        Menu.options = false;
     }
 
     void RemapUp(){

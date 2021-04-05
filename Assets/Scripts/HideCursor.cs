@@ -13,6 +13,10 @@ public class HideCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cursor.visible = false;
+        if(!Menu.options){
+            Cursor.visible = false;
+        }else{
+            Cursor.visible = true;
+        }
     }
 }
