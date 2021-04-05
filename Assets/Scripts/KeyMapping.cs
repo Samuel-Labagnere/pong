@@ -22,6 +22,8 @@ public class KeyMapping : MonoBehaviour
     private RectTransform selectRect;
     public AudioSource changeSound;
     public AudioSource clickSound;
+    public Camera mainCamera;
+    public Camera optionsCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -152,6 +154,11 @@ public class KeyMapping : MonoBehaviour
                 case selectPos.RotRight:
                     clickSound.Play();
                     //
+                break;
+                case selectPos.Confirm:
+                    clickSound.Play();
+                    mainCamera.gameObject.SetActive(true);
+                    optionsCamera.gameObject.SetActive(false);
                 break;
             }
         }

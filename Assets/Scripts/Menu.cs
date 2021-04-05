@@ -29,8 +29,6 @@ public class Menu : MonoBehaviour
     private selectPos currentSelectPos = selectPos.Play;
     private int selectPosNumber = 0;
 
-    public Button returnButton;
-
     public Camera mainCamera;
     public Camera optionsCamera;
 
@@ -48,8 +46,6 @@ public class Menu : MonoBehaviour
         ob.onClick.AddListener(Options);
         Button qb = quitButton.GetComponent<Button>();
         qb.onClick.AddListener(Quit);
-        Button rb = returnButton.GetComponent<Button>();
-        rb.onClick.AddListener(Return);
 
         mainCamera.gameObject.SetActive(true);
         optionsCamera.gameObject.SetActive(false);
@@ -168,11 +164,6 @@ public class Menu : MonoBehaviour
        clickSound.Play();
        mainCamera.gameObject.SetActive(false);
        optionsCamera.gameObject.SetActive(true);
-   }
-   void Return(){
-       clickSound.Play();
-       mainCamera.gameObject.SetActive(true);
-       optionsCamera.gameObject.SetActive(false);
    }
 
    void Quit(){
