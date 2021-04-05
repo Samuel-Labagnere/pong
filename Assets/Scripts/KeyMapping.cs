@@ -31,6 +31,7 @@ public class KeyMapping : MonoBehaviour
     private int selectPosNumber = 0;
 
     public RawImage select;
+    public RawImage coche;
     private RectTransform selectRect;
     public AudioSource changeSound;
     public AudioSource clickSound;
@@ -41,6 +42,19 @@ public class KeyMapping : MonoBehaviour
     void Start()
     {
         selectRect = select.GetComponent<RectTransform>();
+
+        // LoadUserRebinds(pInput);
+
+        if(PlayerPrefs.HasKey("inputTypes")){
+            if(PlayerPrefs.GetInt("inputTypes") == 0){
+                coche.GetComponent<RectTransform>().anchoredPosition = new Vector2(335, 0);
+            }
+            if(PlayerPrefs.GetInt("inputTypes") == 1){
+                coche.GetComponent<RectTransform>().anchoredPosition = new Vector2(-105, 0);
+            }
+        }else{
+            coche.GetComponent<RectTransform>().anchoredPosition = new Vector2(-105, 0);
+        }
 
         fireAction = pInput.actions.FindAction("Fire");
         moveAction = pInput.actions.FindAction("Move");
@@ -119,27 +133,27 @@ public class KeyMapping : MonoBehaviour
             break;
             case selectPos.Left:
                 selectRect.anchoredPosition = new Vector2(-420, -180);
-                selectRect.sizeDelta = new Vector2(150, 150);
+                selectRect.sizeDelta = new Vector2(200, 150);
             break;
             case selectPos.Down:
                 selectRect.anchoredPosition = new Vector2(-170, -180);
-                selectRect.sizeDelta = new Vector2(150, 150);
+                selectRect.sizeDelta = new Vector2(200, 150);
             break;
             case selectPos.Right:
                 selectRect.anchoredPosition = new Vector2(80, -180);
-                selectRect.sizeDelta = new Vector2(150, 150);
+                selectRect.sizeDelta = new Vector2(200, 150);
             break;
             case selectPos.RotLeft:
                 selectRect.anchoredPosition = new Vector2(330, -180);
-                selectRect.sizeDelta = new Vector2(150, 150);
+                selectRect.sizeDelta = new Vector2(200, 150);
             break;
             case selectPos.RotRight:
                 selectRect.anchoredPosition = new Vector2(580, -180);
-                selectRect.sizeDelta = new Vector2(150, 150);
+                selectRect.sizeDelta = new Vector2(200, 150);
             break;
             case selectPos.Confirm:
                 selectRect.anchoredPosition = new Vector2(700, 345);
-                selectRect.sizeDelta = new Vector2(150, 150);
+                selectRect.sizeDelta = new Vector2(200, 150);
             break;
         }
 
@@ -147,11 +161,13 @@ public class KeyMapping : MonoBehaviour
             switch(currentPos){
                 case selectPos.Clavier:
                     clickSound.Play();
-                    //
+                    coche.GetComponent<RectTransform>().anchoredPosition = new Vector2(-105, 0);
+                    PlayerPrefs.SetInt("inputTypes", 1);
                 break;
                 case selectPos.Souris:
                     clickSound.Play();
-                    //
+                    coche.GetComponent<RectTransform>().anchoredPosition = new Vector2(335, 0);
+                    PlayerPrefs.SetInt("inputTypes", 0);
                 break;
                 case selectPos.Up:
                     clickSound.Play();
@@ -186,6 +202,16 @@ public class KeyMapping : MonoBehaviour
         }
     }
 
+    // void SaveUserRebinds(PlayerInput player){
+    //     var json = JsonUtility.ToJson(player.actions);
+    //     PlayerPrefs.SetString("rebinds", json);
+    // }
+
+    // void LoadUserRebinds(PlayerInput player){
+    //     var json = JsonUtility.FromJson<InputActionAsset>(PlayerPrefs.GetString("rebinds"));
+    //     player.actions = json;
+    // }
+
     void Test(InputField input){
         if(input.text.Length > 0){
             Debug.Log("Test! Value = " + input.text);
@@ -211,6 +237,7 @@ public class KeyMapping : MonoBehaviour
                 Debug.Log("saved");
                 moveAction.Enable();
                 moveAction.Dispose();
+                // SaveUserRebinds(pInput);
             });
     }
 
@@ -230,6 +257,7 @@ public class KeyMapping : MonoBehaviour
                 Debug.Log("saved");
                 moveAction.Enable();
                 moveAction.Dispose();
+                // SaveUserRebinds(pInput);
             });
     }
 
@@ -249,6 +277,7 @@ public class KeyMapping : MonoBehaviour
                 Debug.Log("saved");
                 moveAction.Enable();
                 moveAction.Dispose();
+                // SaveUserRebinds(pInput);
             });
     }
 
@@ -268,6 +297,7 @@ public class KeyMapping : MonoBehaviour
                 Debug.Log("saved");
                 moveAction.Enable();
                 moveAction.Dispose();
+                // SaveUserRebinds(pInput);
             });
     }
 

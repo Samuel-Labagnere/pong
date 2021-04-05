@@ -23,12 +23,7 @@ public class MoveBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveAction = test.actions.FindAction("Move");
-        moveAction.PerformInteractiveRebinding()
-                    // To avoid accidental input from mouse motion
-                    .WithControlsExcluding("Mouse")
-                    .OnMatchWaitForAnother(0.1f)
-                    .Start();
+        inputNumber = PlayerPrefs.GetInt("inputTypes");
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -40,12 +35,13 @@ public class MoveBar : MonoBehaviour
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.E)){
-            inputNumber += 1;
-            if(inputNumber == System.Enum.GetValues(typeof(inputTypes)).Length){
-                inputNumber = 0;
-            }
-        }
+        // DEV ONLY
+        // if(Input.GetKeyDown(KeyCode.E)){
+        //     inputNumber += 1;
+        //     if(inputNumber == System.Enum.GetValues(typeof(inputTypes)).Length){
+        //         inputNumber = 0;
+        //     }
+        // }
         switch(inputNumber){
             case 0:
                 currentInput = inputTypes.Mouse;
@@ -81,19 +77,19 @@ public class MoveBar : MonoBehaviour
         }else if(currentInput == inputTypes.Keyboard){
             Vector2 newPos = rb2D.position;
 
-            if (Input.GetAxis("Horizontal") < 0f)
+            if (move.x < 0f)
             {
                 newPos += Time.fixedDeltaTime * speed * Vector2.left;
             }
-            if (Input.GetAxis("Horizontal") > 0f)
+            if (move.x > 0f)
             {
                 newPos += Time.fixedDeltaTime * speed * Vector2.right;
             }
-            if (Input.GetAxis("Vertical") > 0f)
+            if (move.y > 0f)
             {
                 newPos += Time.fixedDeltaTime * speed * Vector2.up;
             }
-            if (Input.GetAxis("Vertical") < 0f)
+            if (move.y < 0f)
             {
                 newPos += Time.fixedDeltaTime * speed * Vector2.down;
             }
