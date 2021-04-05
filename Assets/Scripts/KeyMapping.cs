@@ -194,9 +194,7 @@ public class KeyMapping : MonoBehaviour
                     //
                 break;
                 case selectPos.Confirm:
-                    clickSound.Play();
-                    mainCamera.gameObject.SetActive(true);
-                    optionsCamera.gameObject.SetActive(false);
+                    Confirm();
                 break;
             }
         }
@@ -219,6 +217,12 @@ public class KeyMapping : MonoBehaviour
         if(input.text.Length == 0){
             Debug.Log("Test! Empty!");
         }
+    }
+
+    void Confirm(){
+        clickSound.Play();
+        mainCamera.gameObject.SetActive(true);
+        optionsCamera.gameObject.SetActive(false);
     }
 
     void RemapUp(){

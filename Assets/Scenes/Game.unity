@@ -708,6 +708,7 @@ GameObject:
   - component: {fileID: 524654786}
   - component: {fileID: 524654785}
   - component: {fileID: 524654788}
+  - component: {fileID: 524654789}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -779,6 +780,18 @@ MonoBehaviour:
   hudSelect: {fileID: 2008072691}
   clickSound: {fileID: 381564031}
   selectChange: {fileID: 1699257796}
+--- !u!114 &524654789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524654784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37766e71872c7d44fa855190042170dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &527540017
 GameObject:
   m_ObjectHideFlags: 0

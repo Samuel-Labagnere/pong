@@ -40,12 +40,12 @@ public class Menu : MonoBehaviour
         pos = title.GetComponent<RectTransform>();
         hudSelectPos = hudSelect.gameObject.GetComponent<RectTransform>();
 
-        Button pb = playButton.GetComponent<Button>();
-        pb.onClick.AddListener(Play);
-        Button ob = optionsButton.GetComponent<Button>();
-        ob.onClick.AddListener(Options);
-        Button qb = quitButton.GetComponent<Button>();
-        qb.onClick.AddListener(Quit);
+        // Button pb = playButton.GetComponent<Button>();
+        // pb.onClick.AddListener(Play);
+        // Button ob = optionsButton.GetComponent<Button>();
+        // ob.onClick.AddListener(Options);
+        // Button qb = quitButton.GetComponent<Button>();
+        // qb.onClick.AddListener(Quit);
 
         mainCamera.gameObject.SetActive(true);
         optionsCamera.gameObject.SetActive(false);
