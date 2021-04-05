@@ -171,19 +171,19 @@ public class KeyMapping : MonoBehaviour
                 break;
                 case selectPos.Up:
                     clickSound.Play();
-                    //
+                    RemapUp();
                 break;
                 case selectPos.Left:
                     clickSound.Play();
-                    //
+                    RemapLeft();
                 break;
                 case selectPos.Down:
                     clickSound.Play();
-                    //
+                    RemapDown();
                 break;
                 case selectPos.Right:
                     clickSound.Play();
-                    //
+                    RemapRight();
                 break;
                 case selectPos.RotLeft:
                     clickSound.Play();
