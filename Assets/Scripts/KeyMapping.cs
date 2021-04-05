@@ -10,8 +10,10 @@ public class KeyMapping : MonoBehaviour
     
     private InputAction fireAction;
     private InputAction moveAction;
+    private InputActionRebindingExtensions.RebindingOperation rbOperation;
     private int up;
 
+    public Text button;
     public PlayerInput pInput; 
 
     private enum selectPos {Clavier, Souris, Up, Left, Down, Right, RotLeft, RotRight, Confirm};
@@ -176,7 +178,7 @@ public class KeyMapping : MonoBehaviour
     void Remap(){
         Debug.Log("remap go");
         moveAction.Disable();
-        moveAction.PerformInteractiveRebinding(up)
+        rbOperation = moveAction.PerformInteractiveRebinding(up)
             .WithControlsExcluding("Mouse")
             .WithCancelingThrough("<Keyboard>/escape")
             .OnMatchWaitForAnother(0.2f)
@@ -186,8 +188,11 @@ public class KeyMapping : MonoBehaviour
  
             }).OnComplete(op =>
             {
+                Debug.Log(rbOperation.selectedControl.name);
+                button.text = rbOperation.selectedControl.name;
                 Debug.Log("saved");
                 moveAction.Enable();
+                moveAction.Dispose();
             });
     }
 
