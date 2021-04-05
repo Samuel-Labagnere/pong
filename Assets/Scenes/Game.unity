@@ -1050,7 +1050,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  music: {fileID: 1325080709}
+  bam: {fileID: 549595866}
   toc: {fileID: 1180088821}
+  loose: {fileID: 999643782}
+  click: {fileID: 381564031}
+  change: {fileID: 1699257796}
   scoreTxt: {fileID: 188363393}
   lifesTxt: {fileID: 1063615818}
 --- !u!60 &632954315

@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 77291583}
   - component: {fileID: 77291582}
   - component: {fileID: 77291581}
+  - component: {fileID: 77291584}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -400,6 +401,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &77291584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77291580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c523e3c44a3f8f845ae9cbc12fabfbde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1282678825}
+  music: {fileID: 934768585}
+  click: {fileID: 345943921}
+  change: {fileID: 159680326}
 --- !u!1 &159680325
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,7 +3328,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
